@@ -29,6 +29,7 @@ to be a non-live system running test data (possibly a snapshot of the live
 database) to allow for testing on production hardware.
 
 ## requirements
+
 * php >= 5.5
 * mcrypt php extension
 * mysql server >= 5.1
@@ -40,11 +41,13 @@ database) to allow for testing on production hardware.
 ## setup on ubuntu linux
 
 ### ubuntu 12.04 and 14.04
+
 Install the required packages:
 
     sudo apt-get install php5 php5-mysql php5-mcrypt apache2 libapache2-mod-php5 mysql-server
 
 ### ubuntu 12.04
+
 You will have to add a PPA to fulfill the `php >= 5.5` requirement. 
 [Ondřej Surý's PPA for PHP 5.5](https://launchpad.net/~ondrej/+archive/ubuntu/php5) 
 is recommended. 
@@ -59,6 +62,7 @@ After that:
     sudo apt-get install php5 php5-mcrypt
 
 ### nginx
+
 Nginx works fine as an alternative to Apache for development, but setting it up 
 correctly involves some extra configuration wizardry. In particular, `php5-fpm` 
 (FastCGI Process Manager) should be installed and nginx needs to have the 
@@ -67,6 +71,7 @@ correct permissions to run it. Some additional work may be required to ensure
 guide for now.
 
 ### (recommended) install composer globally
+
 To install `composer` globally to your `$PATH`: 
 
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
@@ -76,22 +81,11 @@ If you change the `install-dir`, make sure the directory is in your `$PATH`.
 ## configuration on linux
 
 ### php5
+
 Enable PHP5 modules:
 
     sudo php5enmod mcrypt mysql pdo pdo_mysql
 
-
-### (optional) install symfony installer globally
-
-To install the symfony installer and have the `symfony` command available 
-globally, run:
-
-    curl -LsS http://symfony.com/installer > symfony.phar
-    sudo mv symfony.phar /usr/local/bin/symfony
-    sudo chmod a+x /usr/local/bin/symfony
-
-This should not be necessary unless you have a need to run 
-`symfony new <project>` to create a new symfony project.
 
 ### (recommended) install composer globally
 
@@ -102,6 +96,7 @@ It may be useful to install composer globally:
     sudo chmod a+x /usr/local/bin/composer
 
 ### clone repository
+
 Clone the github repository into the directory you plan to serve the files from, 
 we're using `/var/www/atx/`.
 
@@ -113,7 +108,24 @@ SSH:
 
     git clone git@github.com:afeique/atx.git /var/www/atx/
 
+### perform setup
+
+The repository does not:
+
+* does not track vendor libraries and packages handled by composer
+* does not ship with a `.env`
+* does not track permissions for cache folders
+
+Therefore, right after cloning the source, you must setup these aspects 
+yourself by running the following commands from the root folder:
+
+    sudo composer install
+    cp .env.example .env
+    php artisan key:generate
+    sudo chmod -R g+rw storage/
+
 ### (optional) set `/var/www` permissions
+
 This is convenient as it allows you to work out of `/var/www` as your non-root 
 user:
 
@@ -122,11 +134,13 @@ user:
     sudo chmod -R g+rw /var/www{,/*}
 
 ### hosts configuration 
+
 Add the following lines to `/etc/host
 
     127.0.0.1   l.acrossti.me
 
 ### virtualhost configuration
+
 Enable `mod_rewrite`:
 
     sudo a2enmod rewrite
@@ -172,33 +186,21 @@ Restart Apache:
 
     sudo service apache2 restart
 
-### symfony dev permissions
-
-In order for symfony to not throw permissions errors every time it tries to 
-either access or write to `app/logs` and `app/cache`, those directories must
-have their user ownership set to the same user that Apache2 runs under,
-typically `www-data` in Ubuntu:
-
-    sudo chown -R www-data:www-data /var/www/atx/app/cache
-    sudo chown -R www-data:www-data /var/www/atx/app/logs
-
-If these permissions are not set, viewing `local.acrossti.me` will render
-a blank page. If you `cat /var/logs/apache2/acrosstime.error.log`, you will
-most likely see a number of 404 errors as symfony is trying to access cache
-files that could not be created due to permission errors.
-
 ## setup on windows 7
 
 ### install git
+
 [Download the msysGit installer](https://git-for-windows.github.io/). Run it.
 Install to any location.
 
 
 ### setup ssh keys
+
 If you plan on using git with SSH, follow Github's directions for 
 [setting up SSH keys](https://help.github.com/articles/generating-ssh-keys/).
 
 ### installation of apache, php, mysql
+
 For convenience, we will be using the [Uniform Server](http://www.uniformserver.com/).
 [Download the latest version](http://sourceforge.net/projects/miniserver/files/) and
 then [obtain the PHP 5.5 module](http://sourceforge.net/projects/miniserver/files/Uniform%20Server%20ZeroXI/ZeroXImodules/).
@@ -212,6 +214,7 @@ any existing web or MySQL servers you have running and listening on the default
 ports.
 
 ### hosts configuration
+
 Open the Start menu. Search for `cmd`, then right-click `cmd.exe` and run in 
 Administrator mode.
 
@@ -226,6 +229,7 @@ privileges. Add the following to your `hosts` file:
     127.0.0.1   l.acrossti.me
 
 ### virtualhost configuration
+
 Go to the root folder you installed the Uniform Server to.
 
 Open `core\apache2\httpd.conf`.
@@ -264,6 +268,7 @@ Add the following virtualhost configurations:
 
 
 ### clone repository
+
 Open a Git Bash insie the directory the Uniform Server instance is set to
 serve files from. By default, this is `www` within the root directory.
 
@@ -277,10 +282,12 @@ SSH:
 
 
 ### start apache and mysql
+
 Open your Uniform Server Controller and start Apache and MySQL using the buttons.
 You should now be able to access the local development and testing URLs.
 
 ### (recommended) install composer
+
 Go to the root directory of your Uniform Server install. From there, navigate to
 `core\php55`. Make a note of the full path, we will refer to it as `%php_path%`.
 
@@ -308,3 +315,34 @@ For convenience, you can permanently add your `%php_path%` to your system
 `%path%`, or alternatively, create a specialized command-line shortcut that 
 runs a `.cmd` or `.bat` file to setup variables for you. The instructions 
 for doing so are omitted for now.
+
+## linux troubleshooting
+
+These are all actions you should take right after cloning the repository.
+
+### failed opening required `../vendor/autoload.php`
+
+Simply go to the root and run:
+
+    sudo composer install
+
+### no supported encrypter found
+
+If you get the following error message:
+
+    No supported encrypter found. The cipher and / or key length are invalid.
+
+Run from the root folder:
+
+    cp .env.example .env
+    php artisan key:generate
+
+### failed to open stream: permission denied
+If you get the following error message:
+
+    Failed to open stream: Permission denied
+
+Run from the root folder:
+
+    sudo chmod -R g+rw storage/
+
