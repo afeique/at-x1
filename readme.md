@@ -322,7 +322,7 @@ These are all actions you should take right after cloning the repository.
 
 ### failed opening required `../vendor/autoload.php`
 
-Simply go to the root and run:
+Run from the root folder:
 
     sudo composer install
 
