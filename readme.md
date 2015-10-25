@@ -338,9 +338,6 @@ Run from the root folder:
     php artisan key:generate
 
 ### failed to open stream: permission denied
-If you get the following error message:
-
-    Failed to open stream: Permission denied
 
 Run from the root folder:
 
