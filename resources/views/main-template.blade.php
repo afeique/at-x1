@@ -31,30 +31,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <div class="ui text container">
-            <ul class="ui borderless main menu">
-                <li class="header item">
-                    acrossti.me
-                </li>
-                <li class="item">
-                    <a class="ui mini red button">
-                        feed
-                    </a>
-                </li>
-                <li class="item">
-                    <a class="ui mini basic violet button">
-                        journal
-                    </a>
-                </li>
-                <li class="item">
-                    <a class="ui mini basic blue button">
-                        friends
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-
+        
         <script src="vendor/html5shiv.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="vendor/jquery-1.11.3.min.js"><\/script>')</script>

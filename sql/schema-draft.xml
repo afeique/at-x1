@@ -39,8 +39,7 @@
 	</group>
 </datatypes><table x="32" y="15" name="users">
 <row name="id" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-<relation table="sessions" row="user_id" />
+<datatype>INT</datatype>
 </row>
 <row name="email" null="0" autoincrement="0">
 <datatype>VARCHAR</datatype>
@@ -48,24 +47,24 @@
 <row name="handle" null="0" autoincrement="0">
 <datatype>VARCHAR</datatype>
 </row>
-<row name="pass_hash" null="0" autoincrement="0">
-<datatype>CHAR(60)</datatype>
-</row>
-<row name="reset_token" null="0" autoincrement="0">
-<datatype>CHAR(32)</datatype>
-</row>
-<row name="ap" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>0</default></row>
-<row name="rp" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-</row>
 <row name="first_name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="last_name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
+<row name="ap" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>0</default></row>
+<row name="rp" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="pass_hash" null="0" autoincrement="0">
+<datatype>CHAR(60)</datatype>
+</row>
+<row name="reset_token" null="0" autoincrement="0">
+<datatype>CHAR(32)</datatype>
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -86,19 +85,22 @@
 <part>last_name</part>
 </key>
 </table>
-<table x="194" y="17" name="sessions">
+<table x="24" y="256" name="sessions">
 <row name="id" null="0" autoincrement="0">
 <datatype>VARCHAR(32)</datatype>
 </row>
-<row name="user_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="ts" null="0" autoincrement="0">
-<datatype>INT</datatype>
-</row>
-<row name="data" null="0" autoincrement="0">
+<row name="content" null="0" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 </row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -106,16 +108,16 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="664" y="160" name="categories">
+<table x="298" y="16" name="timelog_cat_dict">
 <row name="id" null="0" autoincrement="1">
-<datatype>INTEGER</datatype>
-</row>
-<row name="parent_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="categories" row="id" />
+<datatype>INT</datatype>
 </row>
 <row name="name" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(30)</datatype>
+</row>
+<row name="parent_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default><relation table="timelog_cat_dict" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -127,12 +129,12 @@
 <part>name</part>
 </key>
 </table>
-<table x="672" y="274" name="tags">
-<row name="id" null="1" autoincrement="1">
-<datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<table x="299" y="118" name="timelog_tag_dict">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
 <row name="name" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(20)</datatype>
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -141,141 +143,134 @@
 <part>name</part>
 </key>
 </table>
-<table x="194" y="138" name="timelogs">
+<table x="162" y="21" name="timelogs">
 <row name="id" null="0" autoincrement="1">
 <datatype>BIGINT</datatype>
-</row>
-<row name="user_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="users" row="id" />
 </row>
 <row name="minutes" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-</row>
-<row name="created_ts" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-</row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-<key type="INDEX" name="">
-<part>user_id</part>
-</key>
-</table>
-<table x="402" y="158" name="timelog_categories">
-<row name="timelog_id" null="0" autoincrement="0">
-<datatype>BIGINT</datatype>
-<relation table="timelogs" row="id" />
-</row>
-<row name="category_id" null="0" autoincrement="0">
-<datatype>BIGINT</datatype>
-<relation table="categories" row="id" />
-</row>
-<key type="PRIMARY" name="">
-<part>timelog_id</part>
-<part>category_id</part>
-</key>
-</table>
-<table x="404" y="251" name="timelog_tags">
-<row name="timelog_id" null="0" autoincrement="0">
-<datatype>BIGINT</datatype>
-<relation table="timelogs" row="id" />
-</row>
-<row name="tag_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="tags" row="id" />
-</row>
-<key type="PRIMARY" name="">
-<part>timelog_id</part>
-<part>tag_id</part>
-</key>
-</table>
-<table x="674" y="8" name="posts">
-<row name="id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="users" row="id" />
-</row>
-<row name="user_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-</row>
-<row name="content" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
-<row name="created_ts" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-</row>
-<row name="modified_ts" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-<key type="INDEX" name="">
-<part>user_id</part>
-</key>
-</table>
-<table x="415" y="28" name="post_timelogs">
-<row name="post_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="posts" row="id" />
-</row>
-<row name="timelog_id" null="0" autoincrement="0">
-<datatype>BIGINT</datatype>
-<relation table="timelogs" row="id" />
-</row>
-<key type="PRIMARY" name="">
-<part>post_id</part>
-<part>timelog_id</part>
-</key>
-</table>
-<table x="882" y="180" name="post_categories">
-<row name="post_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="posts" row="id" />
-</row>
-<row name="category_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="categories" row="id" />
-</row>
-<key type="PRIMARY" name="">
-<part>post_id</part>
-<part>category_id</part>
-</key>
-</table>
-<table x="881" y="261" name="post_tags">
-<row name="post_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="posts" row="id" />
-</row>
-<row name="tag_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="tags" row="id" />
-</row>
-<key type="PRIMARY" name="">
-<part>post_id</part>
-<part>tag_id</part>
-</key>
-</table>
-<table x="887" y="6" name="comments">
-<row name="id" null="0" autoincrement="1">
-<datatype>BIGINT</datatype>
-</row>
-<row name="user_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-</row>
-<row name="post_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="posts" row="id" />
+<datatype>INT</datatype>
 </row>
 <row name="content" null="0" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 </row>
-<row name="created_ts" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+</table>
+<table x="487" y="17" name="timelog_cats">
+<row name="timelog_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>timelog_id</part>
+<part>dict_id</part>
+</key>
+<key type="INDEX" name="">
+<part>timelog_id</part>
+</key>
+</table>
+<table x="488" y="96" name="timelog_tags">
+<row name="timelog_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="tag_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>timelog_id</part>
+<part>tag_id</part>
+</key>
+<key type="INDEX" name="">
+<part>timelog_id</part>
+</key>
+</table>
+<table x="182" y="223" name="posts">
+<row name="id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="content" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
 </row>
 <row name="modified_ts" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
+<datatype>INT</datatype>
 <default>NULL</default></row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+</table>
+<table x="483" y="220" name="post_cats">
+<row name="post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>post_id</part>
+<part>dict_id</part>
+</key>
+<key type="INDEX" name="">
+<part>dict_id</part>
+</key>
+</table>
+<table x="484" y="299" name="post_tags">
+<row name="post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>post_id</part>
+<part>dict_id</part>
+</key>
+<key type="INDEX" name="">
+<part>dict_id</part>
+</key>
+</table>
+<table x="657" y="218" name="post_comments">
+<row name="id" null="0" autoincrement="1">
+<datatype>BIGINT</datatype>
+</row>
+<row name="content" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -286,32 +281,557 @@
 <part>post_id</part>
 </key>
 </table>
-<table x="176" y="338" name="user_post_likes">
-<row name="user_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="users" row="id" />
-</row>
+<table x="845" y="317" name="post_likes">
 <row name="post_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="posts" row="id" />
+<datatype>INT</datatype>
 </row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
 <key type="PRIMARY" name="">
-<part>user_id</part>
 <part>post_id</part>
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
 </key>
 </table>
-<table x="163" y="417" name="user_comment_likes">
-<row name="user_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<relation table="users" row="id" />
-</row>
+<table x="846" y="220" name="post_comment_likes">
 <row name="comment_id" null="0" autoincrement="0">
-<datatype>BIGINT</datatype>
-<relation table="comments" row="id" />
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>comment_id</part>
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+</table>
+<table x="174" y="417" name="stories">
+<row name="id" null="1" autoincrement="1">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="title" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
 </row>
 <key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
 <part>user_id</part>
+</key>
+</table>
+<table x="1133" y="434" name="chapters">
+<row name="id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="title" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+</row>
+<row name="story_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>story_id</part>
+</key>
+</table>
+<table x="483" y="417" name="story_cats">
+<row name="story_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>story_id</part>
+<part>dict_id</part>
+</key>
+<key type="INDEX" name="">
+<part>dict_id</part>
+</key>
+</table>
+<table x="167" y="873" name="games">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="165" y="976" name="platforms">
+<row name="id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(20)</datatype>
+<default>'NULL'</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="516" y="971" name="game_platforms">
+<row name="game_id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="platform_id" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>game_id</part>
+<part>platform_id</part>
+</key>
+<key type="INDEX" name="">
+<part>platform_id</part>
+</key>
+</table>
+<table x="321" y="970" name="user_platforms">
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="platform_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="platform_handle" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>user_id</part>
+<part>platform_id</part>
+</key>
+<key type="INDEX" name="">
+<part>platform_handle</part>
+</key>
+<key type="INDEX" name="">
+<part>platform_id</part>
+</key>
+</table>
+<table x="1121" y="168" name="post_timelogs">
+<row name="post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="timelog_id" null="0" autoincrement="0">
+<datatype>TINYINT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>post_id</part>
+<part>timelog_id</part>
+</key>
+<key type="INDEX" name="">
+<part>timelog_id</part>
+</key>
+</table>
+<table x="857" y="115" name="timelog_likes">
+<row name="timelog_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>timelog_id</part>
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+</table>
+<table x="321" y="870" name="user_games">
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="game_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>user_id</part>
+<part>game_id</part>
+</key>
+<key type="INDEX" name="">
+<part>game_id</part>
+</key>
+</table>
+<table x="484" y="500" name="story_tags">
+<row name="story_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>story_id</part>
+<part>dict_id</part>
+</key>
+<key type="INDEX" name="">
+<part>dict_id</part>
+</key>
+</table>
+<table x="169" y="621" name="articles">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="title" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="content" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default> </default></row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>title</part>
+</key>
+<key type="INDEX" name="">
+<part>content</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+</table>
+<table x="656" y="18" name="timelog_comments">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="content" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="creation_ts" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="timelog_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>timelog_id</part>
+</key>
+</table>
+<table x="846" y="522" name="story_likes">
+<row name="story_id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>story_id</part>
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+</table>
+<table x="300" y="220" name="post_cat_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(30)</datatype>
+</row>
+<row name="parent_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default><relation table="post_cat_dict" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+<key type="INDEX" name="">
+<part>parent_id</part>
+</key>
+</table>
+<table x="299" y="320" name="post_tag_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(20)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+</table>
+<table x="299" y="417" name="story_cat_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(30)</datatype>
+</row>
+<row name="parent_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default><relation table="story_cat_dict" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+<key type="INDEX" name="">
+<part>parent_id</part>
+</key>
+</table>
+<table x="299" y="523" name="story_tag_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(20)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+</table>
+<table x="299" y="622" name="article_cat_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(30)</datatype>
+</row>
+<row name="parent_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default><relation table="article_cat_dict" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+<key type="INDEX" name="">
+<part>parent_id</part>
+</key>
+</table>
+<table x="299" y="727" name="article_tag_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(20)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+</table>
+<table x="485" y="623" name="article_cats">
+<row name="article_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>article_id</part>
+<part>dict_id</part>
+</key>
+<key type="INDEX" name="">
+<part>dict_id</part>
+</key>
+</table>
+<table x="485" y="706" name="article_tags">
+<row name="article_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>article_id</part>
+<part>dict_id</part>
+</key>
+<key type="INDEX" name="">
+<part>dict_id</part>
+</key>
+</table>
+<table x="658" y="421" name="story_comments">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="content" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="story_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>story_id</part>
+</key>
+</table>
+<table x="652" y="623" name="article_comments">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="content" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="article_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>article_id</part>
+</key>
+</table>
+<table x="857" y="17" name="timelog_comment_likes">
+<row name="comment_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
 <part>comment_id</part>
+<part>user_id</part>
+</key>
+</table>
+<table x="845" y="421" name="story_comment_likes">
+<row name="comment_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>comment_id</part>
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+</table>
+<table x="848" y="727" name="article_likes">
+<row name="article_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>article_id</part>
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+</table>
+<table x="846" y="624" name="article_comment_likes">
+<row name="comment_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>comment_id</part>
+<part>user_id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
 </key>
 </table>
 </sql>
