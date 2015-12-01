@@ -1,14 +1,14 @@
 # acrosstime
 
-## target environments
+## target environment
 Linux, Apache 2.2, PHP 5.5, MySQL 5.1  
-staging: http://dev.acrossti.me/  
-production: http://acrossti.me/  
+staging url: http://dev.acrossti.me/  
+production url: http://acrossti.me/
 
 ## local development environment covered in guide
 Ubuntu 12.04, Ubuntu 14.04, Windows 7  
 Apache 2.4, PHP 5.5, MySQL 5.5  
-local testing: http://l.acrossti.me/
+local development url: http://l.acrossti.me/
 
 **This is a virtualhost setup on your local development environment.**
 
@@ -320,24 +320,20 @@ for doing so are omitted for now.
 
 These are all actions you should take right after cloning the repository.
 
-### failed opening required `../vendor/autoload.php`
+### Failed opening required `../vendor/autoload.php`
 
 Run from the root folder:
 
     sudo composer install
 
-### no supported encrypter found
-
-If you get the following error message:
-
-    No supported encrypter found. The cipher and / or key length are invalid.
+### No supported encrypter found. The cipher and / or key length are invalid.
 
 Run from the root folder:
 
     cp .env.example .env
     php artisan key:generate
 
-### failed to open stream: permission denied
+### Failed to open stream: permission denied
 
 Run from the root folder:
 
