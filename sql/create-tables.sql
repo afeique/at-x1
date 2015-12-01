@@ -12,7 +12,7 @@ USE `acrosstime`;
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `handle` varchar(255) NOT NULL,
   `pass_hash` char(64) NOT NULL,
   `reset_token` char(32) DEFAULT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `users` (
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
-  `id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `id` varchar(128) COLLATE utf8_bin NOT NULL,
   `content` text DEFAULT NULL,
   `creation_ts` int(10) unsigned NOT NULL,
   `modified_ts` int(10) unsigned NOT NULL,
