@@ -42,6 +42,55 @@ CREATE TABLE `sessions` (
 
 
 -- ================================================
+-- GAMES
+-- ================================================
+
+DROP TABLE IF EXISTS `games`;
+CREATE TABLE `games` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name_idx` (`name`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS `platforms`;
+CREATE TABLE `platforms` (
+  `id` int(10) unsigned NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `abbv` varchar(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name_idx` (`name`),
+  KEY `abbv_idx` (`abbv`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS `user_games`;
+CREATE TABLE `user_games` (
+  `user_id` int(10) unsigned NOT NULL,
+  `game_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`, `game_id`),
+  KEY `game_id_idx` (`game_id`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS `user_platforms`;
+CREATE TABLE `user_games` (
+  `user_id` int(10) unsigned NOT NULL,
+  `platform_id` int(10) unsigned NOT NULL,
+  `handle` varchar(40) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`, `platform_id`),
+  KEY `platform_id_idx` (`platform_id`),
+  KEY `handle_idx` (`handle`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS `game_platforms`;
+CREATE TABLE `user_games` (
+  `game_id` int(10) unsigned NOT NULL,
+  `platform_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`game_id`, `platform_id`),
+  KEY `platform_id_idx` (`platform_id`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+
+-- ================================================
 -- CORE
 -- ================================================
 
@@ -113,8 +162,11 @@ CREATE TABLE `timelog_comments` (
   `content` text NOT NULL,
   `creation_ts` int(10) unsigned NOT NULL,
   `modified_ts` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
   `timelog_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id_idx` (`user_id`),
+  KEY `timelog_id_idx` (`timelog_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS `timelog_likes`;
@@ -203,8 +255,11 @@ CREATE TABLE `post_comments` (
   `content` text NOT NULL,
   `creation_ts` int(10) unsigned NOT NULL,
   `modified_ts` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
   `post_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id_idx` (`user_id`),
+  KEY `post_id_idx` (`post_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS `post_likes`;
@@ -305,8 +360,11 @@ CREATE TABLE `story_comments` (
   `content` text NOT NULL,
   `creation_ts` int(10) unsigned NOT NULL,
   `modified_ts` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
   `story_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id_idx` (`user_id`),
+  KEY `story_id_idx` (`story_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS `story_likes`;
@@ -396,8 +454,11 @@ CREATE TABLE `article_comments` (
   `content` text NOT NULL,
   `creation_ts` int(10) unsigned NOT NULL,
   `modified_ts` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
   `article_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_id_idx` (`user_id`),
+  KEY `article_id_idx` (`article_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS `article_likes`;
