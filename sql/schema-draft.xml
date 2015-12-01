@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- SQL XML created by WWW SQL Designer, http://code.google.com/p/wwwsqldesigner/ -->
-<!-- Active URL: http://localhost/sqldesigner/ -->
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: http://ondras.zarovi.cz/sql/demo/ -->
 <sql>
 <datatypes db="mysql">
 	<group label="Numeric" color="rgb(238,238,170)">
@@ -47,23 +47,17 @@
 <row name="handle" null="0" autoincrement="0">
 <datatype>VARCHAR</datatype>
 </row>
-<row name="first_name" null="1" autoincrement="0">
-<datatype>VARCHAR</datatype>
-<default>NULL</default></row>
-<row name="last_name" null="1" autoincrement="0">
-<datatype>VARCHAR</datatype>
-<default>NULL</default></row>
-<row name="ap" null="0" autoincrement="0">
-<datatype>INT</datatype>
-<default>0</default></row>
-<row name="rp" null="0" autoincrement="0">
-<datatype>INT</datatype>
-</row>
 <row name="pass_hash" null="0" autoincrement="0">
 <datatype>CHAR(60)</datatype>
 </row>
 <row name="reset_token" null="0" autoincrement="0">
 <datatype>CHAR(32)</datatype>
+</row>
+<row name="ap" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>0</default></row>
+<row name="rp" null="0" autoincrement="0">
+<datatype>INT</datatype>
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -78,8 +72,6 @@
 <part>reset_token</part>
 </key>
 <key type="INDEX" name="">
-<part>first_name</part>
-<part>last_name</part>
 </key>
 <key type="INDEX" name="">
 <part>last_name</part>
@@ -725,7 +717,7 @@
 <default>NULL</default></row>
 <row name="user_id" null="1" autoincrement="0">
 <datatype>INT</datatype>
-</row>
+<default>NULL</default></row>
 <row name="story_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>

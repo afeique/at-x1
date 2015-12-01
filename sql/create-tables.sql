@@ -72,17 +72,17 @@ CREATE TABLE `user_games` (
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS `user_platforms`;
-CREATE TABLE `user_games` (
+CREATE TABLE `user_platforms` (
   `user_id` int(10) unsigned NOT NULL,
   `platform_id` int(10) unsigned NOT NULL,
-  `handle` varchar(40) unsigned NOT NULL,
+  `handle` varchar(40) NOT NULL,
   PRIMARY KEY (`user_id`, `platform_id`),
   KEY `platform_id_idx` (`platform_id`),
   KEY `handle_idx` (`handle`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS `game_platforms`;
-CREATE TABLE `user_games` (
+CREATE TABLE `game_platforms` (
   `game_id` int(10) unsigned NOT NULL,
   `platform_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`game_id`, `platform_id`),
