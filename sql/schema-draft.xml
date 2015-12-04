@@ -74,7 +74,6 @@
 <key type="INDEX" name="">
 </key>
 <key type="INDEX" name="">
-<part>last_name</part>
 </key>
 </table>
 <table x="24" y="256" name="sessions">
@@ -135,7 +134,7 @@
 <part>name</part>
 </key>
 </table>
-<table x="162" y="21" name="timelogs">
+<table x="164" y="14" name="timelogs">
 <row name="id" null="0" autoincrement="1">
 <datatype>BIGINT</datatype>
 </row>
@@ -191,10 +190,13 @@
 <part>timelog_id</part>
 </key>
 </table>
-<table x="182" y="223" name="posts">
+<table x="175" y="209" name="posts">
 <row name="id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
+<row name="title" null="1" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+<default>NULL</default></row>
 <row name="content" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
@@ -207,11 +209,19 @@
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
+<row name="forum_id" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 <key type="INDEX" name="">
 <part>user_id</part>
+</key>
+<key type="INDEX" name="">
+</key>
+<key type="INDEX" name="">
+<part>forum_id</part>
 </key>
 </table>
 <table x="483" y="220" name="post_cats">
@@ -309,7 +319,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="174" y="417" name="stories">
+<table x="176" y="443" name="stories">
 <row name="id" null="1" autoincrement="1">
 <datatype>INT</datatype>
 <default>NULL</default></row>
@@ -827,6 +837,42 @@
 </key>
 <key type="INDEX" name="">
 <part>user_id</part>
+</key>
+</table>
+<table x="1122" y="251" name="post_stories">
+<row name="post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="story_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>post_id</part>
+<part>story_id</part>
+</key>
+</table>
+<table x="1123" y="337" name="post_articles">
+<row name="post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="article_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>post_id</part>
+<part>article_id</part>
+</key>
+</table>
+<table x="1292" y="170" name="post_posts">
+<row name="parent_post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="child_post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>parent_post_id</part>
+<part>child_post_id</part>
 </key>
 </table>
 </sql>
