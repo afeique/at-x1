@@ -249,7 +249,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="846" y="293" name="thread_likes">
+<table x="646" y="221" name="thread_likes">
 <row name="thread_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -293,7 +293,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="1111" y="191" name="chapters">
+<table x="780" y="419" name="chapters">
 <row name="id" null="1" autoincrement="0">
 <datatype>INT</datatype>
 <default>NULL</default></row>
@@ -328,7 +328,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="1261" y="879" name="games">
+<table x="662" y="942" name="games">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -339,7 +339,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1259" y="982" name="platforms">
+<table x="660" y="1045" name="platforms">
 <row name="id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -353,7 +353,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1610" y="977" name="game_platforms">
+<table x="1011" y="1040" name="game_platforms">
 <row name="game_id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -368,7 +368,7 @@
 <part>platform_id</part>
 </key>
 </table>
-<table x="1415" y="976" name="user_platforms">
+<table x="816" y="1039" name="user_platforms">
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -389,7 +389,7 @@
 <part>handle</part>
 </key>
 </table>
-<table x="1244" y="135" name="timelog_posts">
+<table x="1154" y="565" name="timelog_posts">
 <row name="timelog_id" null="0" autoincrement="0">
 <datatype>TINYINT</datatype>
 </row>
@@ -404,7 +404,7 @@
 <part>timelog_id</part>
 </key>
 </table>
-<table x="845" y="113" name="timelog_likes">
+<table x="650" y="17" name="timelog_likes">
 <row name="timelog_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -425,7 +425,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="1415" y="876" name="user_games">
+<table x="816" y="939" name="user_games">
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -487,7 +487,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="846" y="522" name="story_likes">
+<table x="630" y="418" name="story_likes">
 <row name="story_id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -643,7 +643,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="848" y="728" name="article_likes">
+<table x="646" y="622" name="article_likes">
 <row name="article_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -664,7 +664,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="1244" y="218" name="story_posts">
+<table x="1154" y="648" name="story_posts">
 <row name="story_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -676,7 +676,7 @@
 <part>post_id</part>
 </key>
 </table>
-<table x="1246" y="305" name="article_posts">
+<table x="1156" y="735" name="article_posts">
 <row name="article_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -688,7 +688,7 @@
 <part>post_id</part>
 </key>
 </table>
-<table x="1133" y="28" name="posts">
+<table x="1034" y="488" name="posts">
 <row name="id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -704,6 +704,9 @@
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
+<row name="parent_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -711,9 +714,10 @@
 <part>user_id</part>
 </key>
 <key type="INDEX" name="">
+<part>parent_id</part>
 </key>
 </table>
-<table x="1245" y="48" name="thread_posts">
+<table x="1155" y="478" name="thread_posts">
 <row name="thread_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -725,7 +729,7 @@
 <part>post_id</part>
 </key>
 </table>
-<table x="1411" y="115" name="post_likes">
+<table x="1321" y="545" name="post_likes">
 <row name="post_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -743,7 +747,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="1139" y="405" name="forums">
+<table x="902" y="26" name="forums">
 <row name="id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -772,7 +776,7 @@
 <part>community_id</part>
 </key>
 </table>
-<table x="1111" y="621" name="communities">
+<table x="874" y="242" name="communities">
 <row name="id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -795,7 +799,7 @@
 <part>name</part>
 </key>
 </table>
-<table x="1275" y="621" name="community_cat_dict">
+<table x="1038" y="242" name="community_cat_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -815,7 +819,7 @@
 <part>parent_id</part>
 </key>
 </table>
-<table x="1275" y="733" name="community_tag_dict">
+<table x="1038" y="354" name="community_tag_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -829,7 +833,7 @@
 <part>name</part>
 </key>
 </table>
-<table x="1492" y="624" name="community_cats">
+<table x="1255" y="245" name="community_cats">
 <row name="community_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -841,7 +845,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="1492" y="734" name="community_tags">
+<table x="1255" y="355" name="community_tags">
 <row name="community_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -853,7 +857,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="1280" y="406" name="forum_cat_dict">
+<table x="1043" y="27" name="forum_cat_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -873,7 +877,7 @@
 <part>parent_id</part>
 </key>
 </table>
-<table x="1280" y="506" name="forum_tag_dict">
+<table x="1043" y="127" name="forum_tag_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -887,7 +891,7 @@
 <part>name</part>
 </key>
 </table>
-<table x="1503" y="411" name="forum_cats">
+<table x="1266" y="32" name="forum_cats">
 <row name="forum_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -899,7 +903,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="1504" y="504" name="forum_tags">
+<table x="1267" y="125" name="forum_tags">
 <row name="forum_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
