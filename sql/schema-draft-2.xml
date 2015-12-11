@@ -1277,4 +1277,58 @@
 <part>desc</part>
 </key>
 </table>
+<table x="1391" y="552" name="character_likes">
+<row name="character_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>character_id</part>
+<part>user_id</part>
+</key>
+</table>
+<table x="1544" y="428" name="location_likes">
+<row name="location_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>location_id</part>
+<part>user_id</part>
+</key>
+</table>
+<table x="1568" y="556" name="scene_likes">
+<row name="scene_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>scene_id</part>
+<part>user_id</part>
+</key>
+</table>
 </sql>
