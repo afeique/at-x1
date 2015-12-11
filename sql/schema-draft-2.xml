@@ -96,7 +96,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="298" y="16" name="timelog_cat_dict">
+<table x="298" y="15" name="timelog_cat_dict">
 <row name="id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -186,7 +186,7 @@
 <part>timelog_id</part>
 </key>
 </table>
-<table x="175" y="221" name="threads">
+<table x="175" y="222" name="threads">
 <row name="id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -216,6 +216,9 @@
 </key>
 <key type="INDEX" name="">
 <part>forum_id</part>
+</key>
+<key type="INDEX" name="">
+<part>title</part>
 </key>
 </table>
 <table x="483" y="220" name="thread_cats">
@@ -288,11 +291,9 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="INDEX" name="">
-<part>title</part>
-</key>
-<key type="INDEX" name="">
+<key type="UNIQUE" name="">
 <part>user_id</part>
+<part>title</part>
 </key>
 </table>
 <table x="292" y="431" name="chapters">
@@ -319,6 +320,12 @@
 </key>
 <key type="INDEX" name="">
 <part>story_id</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>title</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>content</part>
 </key>
 </table>
 <table x="1225" y="432" name="story_cats">
@@ -530,10 +537,10 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
-<part>name</part>
-</key>
-<key type="INDEX" name="">
 <part>parent_id</part>
+</key>
+<key type="UNIQUE" name="">
+<part>name</part>
 </key>
 </table>
 <table x="299" y="320" name="thread_tag_dict">
@@ -546,11 +553,11 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="INDEX" name="">
+<key type="UNIQUE" name="">
 <part>name</part>
 </key>
 </table>
-<table x="1044" y="432" name="story_cat_dict">
+<table x="1044" y="430" name="story_cat_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -564,10 +571,10 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
-<part>name</part>
-</key>
-<key type="INDEX" name="">
 <part>parent_id</part>
+</key>
+<key type="UNIQUE" name="">
+<part>name</part>
 </key>
 </table>
 <table x="1044" y="538" name="story_tag_dict">
@@ -580,7 +587,7 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="INDEX" name="">
+<key type="UNIQUE" name="">
 <part>name</part>
 </key>
 </table>
@@ -818,10 +825,10 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
-<part>name</part>
-</key>
-<key type="INDEX" name="">
 <part>parent_id</part>
+</key>
+<key type="UNIQUE" name="">
+<part>name</part>
 </key>
 </table>
 <table x="310" y="1591" name="community_tag_dict">
@@ -834,7 +841,7 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="INDEX" name="">
+<key type="UNIQUE" name="">
 <part>name</part>
 </key>
 </table>
@@ -876,10 +883,10 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
-<part>name</part>
-</key>
-<key type="INDEX" name="">
 <part>parent_id</part>
+</key>
+<key type="UNIQUE" name="">
+<part>name</part>
 </key>
 </table>
 <table x="315" y="1364" name="forum_tag_dict">
@@ -892,7 +899,7 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="INDEX" name="">
+<key type="UNIQUE" name="">
 <part>name</part>
 </key>
 </table>
@@ -1011,6 +1018,12 @@
 <key type="INDEX" name="">
 <part>story_id</part>
 </key>
+<key type="FULLTEXT" name="">
+<part>name</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
+</key>
 </table>
 <table x="1471" y="1264" name="character_posts">
 <row name="character_id" null="1" autoincrement="1">
@@ -1054,10 +1067,10 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
-<part>name</part>
-</key>
-<key type="INDEX" name="">
 <part>parent_id</part>
+</key>
+<key type="UNIQUE" name="">
+<part>name</part>
 </key>
 </table>
 <table x="609" y="945" name="art_tag_dict">
@@ -1070,7 +1083,7 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="INDEX" name="">
+<key type="UNIQUE" name="">
 <part>name</part>
 </key>
 </table>
@@ -1112,10 +1125,10 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
-<part>name</part>
-</key>
-<key type="INDEX" name="">
 <part>parent_id</part>
+</key>
+<key type="UNIQUE" name="">
+<part>name</part>
 </key>
 </table>
 <table x="617" y="1159" name="music_tag_dict">
@@ -1128,7 +1141,7 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="INDEX" name="">
+<key type="UNIQUE" name="">
 <part>name</part>
 </key>
 </table>
@@ -1181,6 +1194,12 @@
 <key type="INDEX" name="">
 <part>story_id</part>
 </key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
+</key>
 </table>
 <table x="562" y="434" name="scenes">
 <row name="id" null="0" autoincrement="1">
@@ -1206,6 +1225,12 @@
 </key>
 <key type="INDEX" name="">
 <part>location_id</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>name</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
 </key>
 </table>
 <table x="683" y="409" name="scene_characters">
@@ -1244,6 +1269,12 @@
 </key>
 <key type="INDEX" name="">
 <part>story_id</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>name</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
 </key>
 </table>
 </sql>
