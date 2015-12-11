@@ -130,14 +130,14 @@
 <part>name</part>
 </key>
 </table>
-<table x="164" y="14" name="timelogs">
+<table x="164" y="13" name="timelogs">
 <row name="id" null="0" autoincrement="1">
 <datatype>BIGINT</datatype>
 </row>
 <row name="minutes" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
-<row name="content" null="0" autoincrement="0">
+<row name="desc" null="0" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 </row>
 <row name="creation_ts" null="0" autoincrement="0">
@@ -154,6 +154,9 @@
 </key>
 <key type="INDEX" name="">
 <part>user_id</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
 </key>
 </table>
 <table x="487" y="17" name="timelog_cats">
@@ -217,7 +220,7 @@
 <key type="INDEX" name="">
 <part>forum_id</part>
 </key>
-<key type="INDEX" name="">
+<key type="FULLTEXT" name="">
 <part>title</part>
 </key>
 </table>
@@ -291,8 +294,10 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="UNIQUE" name="">
+<key type="INDEX" name="">
 <part>user_id</part>
+</key>
+<key type="FULLTEXT" name="">
 <part>title</part>
 </key>
 </table>
@@ -493,13 +498,13 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
+<part>user_id</part>
+</key>
+<key type="FULLTEXT" name="">
 <part>title</part>
 </key>
-<key type="INDEX" name="">
+<key type="FULLTEXT" name="">
 <part>content</part>
-</key>
-<key type="INDEX" name="">
-<part>user_id</part>
 </key>
 </table>
 <table x="1390" y="426" name="story_likes">
@@ -782,10 +787,13 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
+<part>community_id</part>
+</key>
+<key type="FULLTEXT" name="">
 <part>name</part>
 </key>
-<key type="INDEX" name="">
-<part>community_id</part>
+<key type="FULLTEXT" name="">
+<part>desc</part>
 </key>
 </table>
 <table x="145" y="1479" name="communities">
@@ -807,8 +815,11 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
-<key type="INDEX" name="">
+<key type="FULLTEXT" name="">
 <part>name</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
 </key>
 </table>
 <table x="310" y="1479" name="community_cat_dict">
@@ -949,6 +960,15 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>title</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
+</key>
 </table>
 <table x="292" y="849" name="art_revisions">
 <row name="id" null="0" autoincrement="1">
@@ -968,6 +988,12 @@
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>art_id</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
 </key>
 </table>
 <table x="172" y="1052" name="music">
@@ -991,6 +1017,15 @@
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>user_id</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>title</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
 </key>
 </table>
 <table x="684" y="488" name="characters">
@@ -1051,6 +1086,12 @@
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>music_id</part>
+</key>
+<key type="FULLTEXT" name="">
+<part>desc</part>
 </key>
 </table>
 <table x="610" y="848" name="art_cat_dict">
@@ -1329,6 +1370,23 @@
 <key type="PRIMARY" name="">
 <part>scene_id</part>
 <part>user_id</part>
+</key>
+</table>
+<table x="1722" y="426" name="lore_likes">
+<row name="lore_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="count" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<default>1</default></row>
+<key type="PRIMARY" name="">
+<part>lore_id</part>
 </key>
 </table>
 </sql>
