@@ -13,7 +13,7 @@ $x = strtoupper($a);
 echo <<<SQL
 
 -- ------------------------------------------------
--- $x REP
+-- $x COMMON
 -- ------------------------------------------------
 
 --
@@ -73,6 +73,29 @@ CREATE TABLE `{$a}_likes` (
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 
+SQL;
+
+endforeach;
+
+
+$arg = array('timelog', 'thread', 'story', 'article', 'art', 'music');
+
+foreach ($arg as $a):
+$x = strtoupper($a);
+echo <<<SQL
+
+-- ------------------------------------------------
+-- POSTS
+-- ------------------------------------------------
+
+SQL;
+
+echo <<<SQL
+
+--
+-- $x POSTS
+--
+
 DROP TABLE IF EXISTS `{$a}_posts`;
 CREATE TABLE `{$a}_posts` (
   `{$a}_id` int(10) unsigned NOT NULL,
@@ -80,7 +103,6 @@ CREATE TABLE `{$a}_posts` (
   PRIMARY KEY (`{$a}_id`, `user_id`),
   KEY `post_id_idx` (`post_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
 
 SQL;
 

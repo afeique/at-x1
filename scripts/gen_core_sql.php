@@ -1,11 +1,12 @@
 <?php
 
 echo <<<SQL
+
 USE `acrosstime`;
+
 SQL;
 
 echo <<<SQL
-
 
 -- ------------------------------------------------
 -- USERS
@@ -113,6 +114,10 @@ CREATE TABLE `platforms` (
   KEY `abbv_idx` (`abbv`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- GAME RELATIONS
+--
+
 DROP TABLE IF EXISTS `user_games`;
 CREATE TABLE `user_games` (
   `user_id` int(10) unsigned NOT NULL,
@@ -141,3 +146,4 @@ CREATE TABLE `game_platforms` (
 
 
 SQL;
+
