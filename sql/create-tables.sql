@@ -156,19 +156,6 @@ CREATE TABLE `timelog_tags` (
 -- SOCIAL
 --
 
-DROP TABLE IF EXISTS `timelog_comments`;
-CREATE TABLE `timelog_comments` (
-  `id` int(10) unsigned NOT NULL,
-  `content` text NOT NULL,
-  `creation_ts` int(10) unsigned NOT NULL,
-  `modified_ts` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `timelog_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `timelog_id_idx` (`timelog_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
 DROP TABLE IF EXISTS `timelog_likes`;
 CREATE TABLE `timelog_likes` (
   `timelog_id` int(10) unsigned NOT NULL,
@@ -178,29 +165,22 @@ CREATE TABLE `timelog_likes` (
   KEY `user_id_idx` (`user_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS `timelog_comment_likes`;
-CREATE TABLE `timelog_comment_likes` (
-  `comment_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`comment_id`, `user_id`),
-  KEY `user_id_idx` (`user_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
 
 
 -- ------------------------------------------------
--- POSTS
+-- THREADS
 -- ------------------------------------------------
 
 
-DROP TABLE IF EXISTS `posts`;
-CREATE TABLE `posts` (
+DROP TABLE IF EXISTS `threads`;
+CREATE TABLE `threads` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `content` text NOT NULL,
+  `title` varchar(255) NOT NULL,
   `creation_ts` int(10) unsigned NOT NULL,
   `modified_ts` int(10) unsigned DEFAULT NULL,
   `user_id` int(10) unsigned NOT NULL,
+  `forum_id` int(10) unsigned NOT NULL,
+  `post_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
@@ -208,8 +188,8 @@ CREATE TABLE `posts` (
 -- ORGANIZATION
 --
 
-DROP TABLE IF EXISTS `post_cat_dicts`;
-CREATE TABLE `post_cat_dicts` (
+DROP TABLE IF EXISTS `thread_cat_dicts`;
+CREATE TABLE `thread_cat_dicts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `parent_id` int(10) unsigned DEFAULT NULL,
@@ -217,8 +197,8 @@ CREATE TABLE `post_cat_dicts` (
   UNIQUE KEY `name_uq` (`name`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS `post_tag_dicts`;
-CREATE TABLE `post_tag_dicts` (
+DROP TABLE IF EXISTS `thread_tag_dicts`;
+CREATE TABLE `thread_tag_dicts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
@@ -229,19 +209,19 @@ CREATE TABLE `post_tag_dicts` (
 -- ORGANIZATIONAL RELATIONS
 --
 
-DROP TABLE IF EXISTS `post_cats`;
-CREATE TABLE `post_cats` (
-  `post_id` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `thread_cats`;
+CREATE TABLE `thread_cats` (
+  `thread_id` int(10) unsigned NOT NULL,
   `dict_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`post_id`, `dict_id`),
+  PRIMARY KEY (`thread_id`, `dict_id`),
   KEY `dict_id_idx` (`dict_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS `post_tags`;
-CREATE TABLE `post_tags` (
-  `post_id` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `thread_tags`;
+CREATE TABLE `thread_tags` (
+  `thread_id` int(10) unsigned NOT NULL,
   `dict_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`post_id`, `dict_id`),
+  PRIMARY KEY (`thread_id`, `dict_id`),
   KEY `dict_id_idx` (`dict_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
@@ -249,47 +229,13 @@ CREATE TABLE `post_tags` (
 -- SOCIAL
 --
 
-DROP TABLE IF EXISTS `post_comments`;
-CREATE TABLE `post_comments` (
-  `id` int(10) unsigned NOT NULL,
-  `content` text NOT NULL,
-  `creation_ts` int(10) unsigned NOT NULL,
-  `modified_ts` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `post_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `post_id_idx` (`post_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
-DROP TABLE IF EXISTS `post_likes`;
-CREATE TABLE `post_likes` (
-  `post_id` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `thread_likes`;
+CREATE TABLE `thread_likes` (
+  `thread_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `count` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`post_id`, `user_id`),
+  PRIMARY KEY (`thread_id`, `user_id`),
   KEY `user_id_idx` (`user_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
-DROP TABLE IF EXISTS `post_comment_likes`;
-CREATE TABLE `post_comment_likes` (
-  `comment_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`comment_id`, `user_id`),
-  KEY `user_id_idx` (`user_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
---
--- CORE RELATIONS
---
-
-DROP TABLE IF EXISTS `post_timelogs`;
-CREATE TABLE `post_timelogs` (
-  `post_id` int(10) unsigned NOT NULL,
-  `timelog_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`post_id`, `timelog_id`),
-  KEY `timelog_id_idx` (`timelog_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 
@@ -354,34 +300,12 @@ CREATE TABLE `story_tags` (
 -- SOCIAL
 --
 
-DROP TABLE IF EXISTS `story_comments`;
-CREATE TABLE `story_comments` (
-  `id` int(10) unsigned NOT NULL,
-  `content` text NOT NULL,
-  `creation_ts` int(10) unsigned NOT NULL,
-  `modified_ts` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `story_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `story_id_idx` (`story_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
 DROP TABLE IF EXISTS `story_likes`;
 CREATE TABLE `story_likes` (
   `story_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `count` int(10) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`story_id`, `user_id`),
-  KEY `user_id_idx` (`user_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
-DROP TABLE IF EXISTS `story_comment_likes`;
-CREATE TABLE `story_comment_likes` (
-  `comment_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`comment_id`, `user_id`),
   KEY `user_id_idx` (`user_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
@@ -448,33 +372,11 @@ CREATE TABLE `article_tags` (
 -- SOCIAL
 --
 
-DROP TABLE IF EXISTS `article_comments`;
-CREATE TABLE `article_comments` (
-  `id` int(10) unsigned NOT NULL,
-  `content` text NOT NULL,
-  `creation_ts` int(10) unsigned NOT NULL,
-  `modified_ts` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `article_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `article_id_idx` (`article_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
 DROP TABLE IF EXISTS `article_likes`;
 CREATE TABLE `article_likes` (
   `article_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `count` int(10) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY (`article_id`, `user_id`),
-  KEY `user_id_idx` (`user_id`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
-DROP TABLE IF EXISTS `article_comment_likes`;
-CREATE TABLE `article_comment_likes` (
-  `comment_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `count` int(10) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`comment_id`, `user_id`),
   KEY `user_id_idx` (`user_id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;

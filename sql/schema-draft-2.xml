@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- SQL XML created by WWW SQL Designer, http://code.google.com/p/wwwsqldesigner/ -->
 <!-- Active URL: http://localhost/sqldesigner/ -->
 <sql>
 <datatypes db="mysql">
@@ -101,12 +101,11 @@
 <datatype>INT</datatype>
 </row>
 <row name="name" null="0" autoincrement="0">
-<datatype>VARCHAR(30)</datatype>
+<datatype>VARCHAR(40)</datatype>
 </row>
 <row name="parent_id" null="1" autoincrement="0">
 <datatype>INT</datatype>
-<default>NULL</default><relation table="timelog_cat_dict" row="id" />
-</row>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -122,7 +121,7 @@
 <datatype>INT</datatype>
 </row>
 <row name="name" null="0" autoincrement="0">
-<datatype>VARCHAR(20)</datatype>
+<datatype>VARCHAR(40)</datatype>
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -194,9 +193,6 @@
 <row name="title" null="0" autoincrement="0">
 <datatype>VARCHAR(255)</datatype>
 </row>
-<row name="content" null="1" autoincrement="0">
-<datatype>MEDIUMTEXT</datatype>
-<default>NULL</default></row>
 <row name="creation_ts" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -209,6 +205,9 @@
 <row name="forum_id" null="1" autoincrement="0">
 <datatype>INT</datatype>
 <default>NULL</default></row>
+<row name="post_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -290,19 +289,28 @@
 <part>id</part>
 </key>
 <key type="INDEX" name="">
+<part>title</part>
+</key>
+<key type="INDEX" name="">
 <part>user_id</part>
 </key>
 </table>
-<table x="780" y="419" name="chapters">
+<table x="292" y="431" name="chapters">
 <row name="id" null="1" autoincrement="0">
 <datatype>INT</datatype>
 <default>NULL</default></row>
 <row name="title" null="0" autoincrement="0">
-<datatype>VARCHAR</datatype>
+<datatype>VARCHAR(255)</datatype>
 </row>
 <row name="content" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
 <row name="story_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -313,7 +321,7 @@
 <part>story_id</part>
 </key>
 </table>
-<table x="483" y="417" name="story_cats">
+<table x="1225" y="432" name="story_cats">
 <row name="story_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -328,7 +336,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="662" y="942" name="games">
+<table x="176" y="1718" name="games">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -339,7 +347,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="660" y="1045" name="platforms">
+<table x="174" y="1821" name="platforms">
 <row name="id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -353,7 +361,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1011" y="1040" name="game_platforms">
+<table x="525" y="1816" name="game_platforms">
 <row name="game_id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -368,7 +376,7 @@
 <part>platform_id</part>
 </key>
 </table>
-<table x="816" y="1039" name="user_platforms">
+<table x="330" y="1815" name="user_platforms">
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -389,7 +397,7 @@
 <part>handle</part>
 </key>
 </table>
-<table x="1154" y="565" name="timelog_posts">
+<table x="1462" y="1011" name="timelog_posts">
 <row name="timelog_id" null="0" autoincrement="0">
 <datatype>TINYINT</datatype>
 </row>
@@ -425,7 +433,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="816" y="939" name="user_games">
+<table x="330" y="1715" name="user_games">
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -440,7 +448,7 @@
 <part>game_id</part>
 </key>
 </table>
-<table x="484" y="500" name="story_tags">
+<table x="1228" y="541" name="story_tags">
 <row name="story_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -487,7 +495,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="630" y="418" name="story_likes">
+<table x="1390" y="426" name="story_likes">
 <row name="story_id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -513,12 +521,11 @@
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="name" null="0" autoincrement="0">
-<datatype>VARCHAR(30)</datatype>
+<datatype>VARCHAR(40)</datatype>
 </row>
 <row name="parent_id" null="1" autoincrement="0">
 <datatype>INT</datatype>
-<default>NULL</default><relation table="thread_cat_dict" row="id" />
-</row>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -534,7 +541,7 @@
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="name" null="0" autoincrement="0">
-<datatype>VARCHAR(20)</datatype>
+<datatype>VARCHAR(40)</datatype>
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -543,7 +550,7 @@
 <part>name</part>
 </key>
 </table>
-<table x="299" y="417" name="story_cat_dict">
+<table x="1044" y="432" name="story_cat_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -552,8 +559,7 @@
 </row>
 <row name="parent_id" null="1" autoincrement="0">
 <datatype>INT</datatype>
-<default>NULL</default><relation table="story_cat_dict" row="id" />
-</row>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -564,7 +570,7 @@
 <part>parent_id</part>
 </key>
 </table>
-<table x="299" y="523" name="story_tag_dict">
+<table x="1044" y="538" name="story_tag_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -583,12 +589,11 @@
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="name" null="0" autoincrement="0">
-<datatype>VARCHAR(30)</datatype>
+<datatype>VARCHAR(40)</datatype>
 </row>
 <row name="parent_id" null="1" autoincrement="0">
 <datatype>INT</datatype>
-<default>NULL</default><relation table="article_cat_dict" row="id" />
-</row>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -604,7 +609,7 @@
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="name" null="0" autoincrement="0">
-<datatype>VARCHAR(20)</datatype>
+<datatype>VARCHAR(40)</datatype>
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -643,7 +648,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="646" y="622" name="article_likes">
+<table x="640" y="664" name="article_likes">
 <row name="article_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -664,7 +669,7 @@
 <part>user_id</part>
 </key>
 </table>
-<table x="1154" y="648" name="story_posts">
+<table x="1462" y="1094" name="story_posts">
 <row name="story_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -676,7 +681,7 @@
 <part>post_id</part>
 </key>
 </table>
-<table x="1156" y="735" name="article_posts">
+<table x="1464" y="1181" name="article_posts">
 <row name="article_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -688,7 +693,7 @@
 <part>post_id</part>
 </key>
 </table>
-<table x="1034" y="488" name="posts">
+<table x="1342" y="934" name="posts">
 <row name="id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -717,7 +722,7 @@
 <part>parent_id</part>
 </key>
 </table>
-<table x="1155" y="478" name="thread_posts">
+<table x="1462" y="930" name="thread_posts">
 <row name="thread_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -729,7 +734,7 @@
 <part>post_id</part>
 </key>
 </table>
-<table x="1321" y="545" name="post_likes">
+<table x="1629" y="991" name="post_likes">
 <row name="post_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -741,13 +746,13 @@
 </row>
 <row name="count" null="1" autoincrement="0">
 <datatype>INT</datatype>
-</row>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>post_id</part>
 <part>user_id</part>
 </key>
 </table>
-<table x="902" y="26" name="forums">
+<table x="189" y="1263" name="forums">
 <row name="id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -755,7 +760,7 @@
 <datatype>VARCHAR(255)</datatype>
 </row>
 <row name="desc" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
+<datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <row name="creation_ts" null="0" autoincrement="0">
 <datatype>INT</datatype>
@@ -776,7 +781,7 @@
 <part>community_id</part>
 </key>
 </table>
-<table x="874" y="242" name="communities">
+<table x="145" y="1479" name="communities">
 <row name="id" null="0" autoincrement="1">
 <datatype>INT</datatype>
 </row>
@@ -784,7 +789,7 @@
 <datatype>VARCHAR(255)</datatype>
 </row>
 <row name="desc" null="1" autoincrement="0">
-<datatype>VARCHAR(255)</datatype>
+<datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <row name="creation_ts" null="0" autoincrement="0">
 <datatype>INT</datatype>
@@ -799,7 +804,7 @@
 <part>name</part>
 </key>
 </table>
-<table x="1038" y="242" name="community_cat_dict">
+<table x="310" y="1479" name="community_cat_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -819,7 +824,7 @@
 <part>parent_id</part>
 </key>
 </table>
-<table x="1038" y="354" name="community_tag_dict">
+<table x="310" y="1591" name="community_tag_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -833,7 +838,7 @@
 <part>name</part>
 </key>
 </table>
-<table x="1255" y="245" name="community_cats">
+<table x="527" y="1482" name="community_cats">
 <row name="community_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -845,7 +850,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="1255" y="355" name="community_tags">
+<table x="527" y="1592" name="community_tags">
 <row name="community_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -857,7 +862,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="1043" y="27" name="forum_cat_dict">
+<table x="315" y="1264" name="forum_cat_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -877,7 +882,7 @@
 <part>parent_id</part>
 </key>
 </table>
-<table x="1043" y="127" name="forum_tag_dict">
+<table x="315" y="1364" name="forum_tag_dict">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -891,7 +896,7 @@
 <part>name</part>
 </key>
 </table>
-<table x="1266" y="32" name="forum_cats">
+<table x="534" y="1263" name="forum_cats">
 <row name="forum_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -903,7 +908,7 @@
 <part>dict_id</part>
 </key>
 </table>
-<table x="1267" y="125" name="forum_tags">
+<table x="539" y="1362" name="forum_tags">
 <row name="forum_id" null="0" autoincrement="0">
 <datatype>INT</datatype>
 </row>
@@ -913,6 +918,332 @@
 <key type="PRIMARY" name="">
 <part>forum_id</part>
 <part>dict_id</part>
+</key>
+</table>
+<table x="172" y="848" name="art">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="title" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="desc" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="292" y="849" name="art_revisions">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="uri" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="art_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="172" y="1052" name="music">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="title" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="684" y="488" name="characters">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="story_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>story_id</part>
+</key>
+</table>
+<table x="1471" y="1264" name="character_posts">
+<row name="character_id" null="1" autoincrement="1">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>character_id</part>
+</key>
+</table>
+<table x="299" y="1055" name="music_revisions">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="uri" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="music_id" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="610" y="848" name="art_cat_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(40)</datatype>
+</row>
+<row name="parent_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+<key type="INDEX" name="">
+<part>parent_id</part>
+</key>
+</table>
+<table x="609" y="945" name="art_tag_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT(40)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+</table>
+<table x="785" y="851" name="art_cats">
+<row name="art_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>art_id</part>
+<part>dict_id</part>
+</key>
+</table>
+<table x="786" y="948" name="art_tags">
+<row name="art_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>art_id</part>
+<part>dict_id</part>
+</key>
+</table>
+<table x="616" y="1051" name="music_cat_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(40)</datatype>
+</row>
+<row name="parent_id" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+<key type="INDEX" name="">
+<part>parent_id</part>
+</key>
+</table>
+<table x="617" y="1159" name="music_tag_dict">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(40)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>name</part>
+</key>
+</table>
+<table x="798" y="1050" name="music_cats">
+<row name="music_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>music_id</part>
+<part>dict_id</part>
+</key>
+</table>
+<table x="802" y="1162" name="music_tags">
+<row name="music_id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="dict_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>music_id</part>
+<part>dict_id</part>
+</key>
+</table>
+<table x="426" y="432" name="locations">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="story_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>story_id</part>
+</key>
+</table>
+<table x="562" y="434" name="scenes">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="location_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>location_id</part>
+</key>
+</table>
+<table x="683" y="409" name="scene_characters">
+<row name="scene_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="character_id" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>scene_id</part>
+<part>character_id</part>
+</key>
+</table>
+<table x="884" y="425" name="lore">
+<row name="id" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="creation_ts" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="modified_ts" null="1" autoincrement="0">
+<datatype>INT</datatype>
+<default>NULL</default></row>
+<row name="story_id" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<key type="INDEX" name="">
+<part>story_id</part>
 </key>
 </table>
 </sql>
