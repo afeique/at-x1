@@ -67,17 +67,6 @@ CREATE TABLE `threads` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS `stories`;
-CREATE TABLE `stories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `creation_ts` int(10) unsigned NOT NULL,
-  `modified_ts` int(10) unsigned DEFAULT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `title_idx` (`title`)
-) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
 DROP TABLE IF EXISTS `articles`;
 CREATE TABLE `articles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -142,6 +131,77 @@ CREATE TABLE `game_platforms` (
   `platform_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`game_id`, `platform_id`),
   KEY `platform_id_idx` (`platform_id`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+
+-- ------------------------------------------------
+-- STORIES
+-- ------------------------------------------------
+
+
+DROP TABLE IF EXISTS `stories`;
+CREATE TABLE `stories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `creation_ts` int(10) unsigned NOT NULL,
+  `modified_ts` int(10) unsigned DEFAULT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `private` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `title_idx` (`title`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+
+DROP TABLE IF EXISTS `chapters`;
+CREATE TABLE `chapters` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `creation_ts` int(10) unsigned NOT NULL,
+  `modified_ts` int(10) unsigned DEFAULT NULL,
+  `story_id` int(10) unsigned NOT NULL,
+  `private` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `title_idx` (`title`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS `locations`;
+CREATE TABLE `locations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `desc` text NOT NULL,
+  `creation_ts` int(10) unsigned NOT NULL,
+  `modified_ts` int(10) unsigned DEFAULT NULL,
+  `story_id` int(10) unsigned NOT NULL,
+  `private` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `name_idx` (`name`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS `characters`;
+CREATE TABLE `characters` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `desc` text NOT NULL,
+  `creation_ts` int(10) unsigned NOT NULL,
+  `modified_ts` int(10) unsigned DEFAULT NULL,
+  `story_id` int(10) unsigned NOT NULL,
+  `private` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `name_idx` (`name`)
+) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS `lore`;
+CREATE TABLE `lore` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `desc` text NOT NULL,
+  `creation_ts` int(10) unsigned NOT NULL,
+  `modified_ts` int(10) unsigned DEFAULT NULL,
+  `story_id` int(10) unsigned NOT NULL,
+  `private` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `title_idx` (`title`)
 ) ENGINE=INNODB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 
