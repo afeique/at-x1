@@ -339,3 +339,24 @@ Run from the root folder:
 
     sudo chmod -R g+rw storage/
 
+## building zurb assets
+
+Acrossti.me uses the [Zurb Foundation](http://foundation.zurb.com/) SASS framework.
+
+### setup on linux
+
+First, make sure [node.js](https://nodejs.org/en/) is installed and that you can use `npm` from the command line.
+
+Install the Zurb Foundation CLI using:
+
+    sudo npm install --global foundation-cli
+
+Go into the `zurb` directory and run:
+
+    sudo npm install
+
+This will install the necessary dependencies. Then, from the same folder, run:
+
+    npm run build
+
+This will build Zurb assets into the `public` and `resources/views` directories.
